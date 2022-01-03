@@ -6,3 +6,6 @@ print('abc'.islower())    # 문자열 내의 Character 들이 모두 소문자�
 print('ABC'.isupper())    # 문자열 내의 Character 들이 모두 대문자인가?
 print('\t\r\n'.isspace())    # 문자열 내의 Character 들이 모두 공백 문자인가?
 print('This Is A Title'.istitle())    # 문자열이 Title 형식 (각 단어의 첫글자가 대문자) 인가?
+
+
+
