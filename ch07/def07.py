@@ -4,6 +4,14 @@
 
 # 매개변수 앞에  *를 붙이면 해당 매개변수는 가변매개변수로 지정됨
 # def 함수이름(*매개변수):
+#     코드블럭 *Args
 def merge_string(*text):
     result=''
-    print('type(text')
+    print('type(text)->', type(text))
+    #    ('아버지가','방에','들어 가신다')
+    for s in text:
+        result = result + " " + s
+    return result
+
+print(merge_string('아버지가', '방에', '들어 가신다'))
+
