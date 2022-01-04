@@ -21,7 +21,7 @@ url = "https://openapi.naver.com/v1/papago/n2mt"
 
 # 문장번역 누적 변수
 totalText = ''
-with open('Yesterday.txt','r') as readFile:
+with open('Yesterday.txt', 'r') as readFile:
     sourceText = 'Start..'   # 초기화된 값을 설정, 일단 시작할수 있도록...
 
     while sourceText != '':   # readline()함수는 파일의 끝에 도달하면 ''를 반환함
@@ -30,5 +30,27 @@ with open('Yesterday.txt','r') as readFile:
         payLoad = {
             'source': 'en',
             'target': 'ko',
-            'Yesterday.txt': r,
+            'text': sourceText,
         }
+
+        req = Request('POST', url, data=payLoad, headers=headers)
+        # 미리 내부적으로 Compile
+        prepared = req.prepare()
+        # Session 객체를 통해 전송
+        res = s.send(prepared)
+
+        print("res.json() -> ", res.json())
+
+        try:
+            transText = res.json()['message']['result']['translatedText']
+        except:
+            transText = '종료'
+            break
+        totalText = totalText + '\n' + sourceText + transText + '\n'
+
+with open('Yesterday.txt', 'w', encoding='utf-8') as writeFile:
+    writeFile.write(totalText)
+    readFile.close()
+    writeFile.close()
+
+print("totalText -> ", totalText)
